@@ -2,7 +2,7 @@
 <RunSettings>
   <RunConfiguration>
     <EnvironmentVariables>
-        <HEADED>1</HEADED>
-    </EnvironmentVariables>
+        <HEADED>1</HEADED> // Disable headless mode. To enable change value for the 'HEADED' tag to '0'
+	</EnvironmentVariables>
   </RunConfiguration>
 </RunSettings>

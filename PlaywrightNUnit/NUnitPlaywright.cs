@@ -7,14 +7,16 @@ namespace PlaywrightDemo.PlaywrightNUnit
 {
     public class NUnitPlaywright : PageTest
     {
+        private string homePageUrl = "http://eaapp.somee.com/";
+
         [SetUp]
         public async Task Setup()
         {
-            await Page.GotoAsync("https://playwright.dev/docs/intro");
+            await Page.GotoAsync(homePageUrl);
         }
 
-        [Test, Description("Is Page Loaded")]
-        public async Task Test1()
+        [Test]
+        public async Task IsDotnetPageLoaded()
         {
             await Page.HoverAsync(".dropdown--hoverable");
             await Page.ClickAsync("text=.NET");
