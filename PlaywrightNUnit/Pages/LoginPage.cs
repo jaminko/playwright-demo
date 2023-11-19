@@ -1,26 +1,37 @@
 ﻿using Microsoft.Playwright;
+using OpenQA.Selenium;
+using PlaywrightDemo.Selenium.Pages;
 using System.Threading.Tasks;
 
 namespace PlaywrightDemo.PlaywrightNUnit.Pages
 {
     public class LoginPage
     {
+        private readonly IPage _page;
+
         public LoginPage(IPage page)
         {
             _page = page;
         }
 
-        private IPage _page;
+        #region Components
+
         private ILocator TxtUserName => _page.Locator("#UserName");
         private ILocator TxtPassword => _page.Locator("#Password");
         private ILocator BtnLogin => _page.Locator(".btn-default", new PageLocatorOptions { HasTextString = "Log in" });
 
+        #endregion
 
-        public async Task PerformLogin(string userName, string password)
+        #region Helper methods
+
+        public async Task<LoggedInPage> PerformLogin(string userName, string password)
         {
             await TxtUserName.FillAsync(userName);
             await TxtPassword.FillAsync(password);
             await BtnLogin.ClickAsync();
+            return new LoggedInPage(_page);
         }
+
+        #endregion
     }
 }
