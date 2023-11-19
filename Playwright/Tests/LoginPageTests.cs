@@ -1,10 +1,10 @@
 ﻿using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
-using PlaywrightDemo.PlaywrightNUnit.Pages;
+using PlaywrightDemo.Playwright.Pages;
 using System.Threading.Tasks;
 
-namespace PlaywrightDemo.PlaywrightNUnit.Tests
+namespace PlaywrightDemo.Playwright.Tests
 {
     [TestFixture]
     public class LoginPageTests : PageTest
