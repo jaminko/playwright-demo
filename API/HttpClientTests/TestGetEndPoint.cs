@@ -3,7 +3,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PlaywrightDemo.API.HttpClientTests
+namespace DemoTestFramework.API.HttpClientTests
 {
     public class TestGetEndPoint
     {

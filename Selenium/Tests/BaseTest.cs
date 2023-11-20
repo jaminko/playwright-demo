@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using System;
 
-namespace DepositeCalcTests.Tests
+namespace DemoTestFramework.Tests
 {
     public class BaseTest
     {

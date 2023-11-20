@@ -1,7 +1,7 @@
-﻿using DepositeCalcTests.Tests;
+﻿using DemoTestFramework.Selenium.Pages;
+using DemoTestFramework.Tests;
 using NUnit.Framework;
-using PlaywrightDemo.Selenium.Pages;
-namespace PlaywrightDemo.Selenium.Tests
+namespace DemoTestFramework.Selenium.Tests
 {
     public class LoginPageTests : BaseTest
     {

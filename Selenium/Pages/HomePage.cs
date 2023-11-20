@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace PlaywrightDemo.Selenium.Pages
+namespace DemoTestFramework.Selenium.Pages
 {
     public class HomePage : BasePage
     {

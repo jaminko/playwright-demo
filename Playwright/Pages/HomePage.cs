@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright;
 using System.Threading.Tasks;
 
-namespace PlaywrightDemo.Playwright.Pages
+namespace DemoTestFramework.Playwright.Pages
 {
     public class HomePage
     {

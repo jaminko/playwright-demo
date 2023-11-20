@@ -1,7 +1,7 @@
 ﻿using DemoTestFramework.Selenium.Pages;
 using OpenQA.Selenium;
 
-namespace PlaywrightDemo.Selenium.Pages
+namespace DemoTestFramework.Selenium.Pages
 {
     public class LoginPage : BasePage, IPage
     {

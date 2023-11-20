@@ -1,6 +1,6 @@
 ﻿using Microsoft.Playwright;
 
-namespace PlaywrightDemo.Playwright.Pages
+namespace DemoTestFramework.Playwright.Pages
 {
     public class LoggedInPage
     {
