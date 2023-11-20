@@ -1,8 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using DemoTestFramework.Selenium.Pages;
+using OpenQA.Selenium;
 
 namespace PlaywrightDemo.Selenium.Pages
 {
-    public class LoginPage : BasePage
+    public class LoginPage : BasePage, IPage
     {
         public LoginPage(IWebDriver driver) : base(driver)
         {
@@ -23,7 +24,6 @@ namespace PlaywrightDemo.Selenium.Pages
 
         #endregion
 
-
         #region Helper methods
 
         public LoggedInPage PerformLogin(string userName, string password)
@@ -37,6 +37,20 @@ namespace PlaywrightDemo.Selenium.Pages
         public string TxtUserNameErrorMsgText => TxtUserNameErrorMsg.Text;
 
         public string TxtPasswordErrorMsgText => TxtPasswordErrorMsg.Text;
+
+        #endregion
+
+        #region Asserts
+
+        public string HasCorrectUrl()
+        {
+            return driver.Url;
+        }
+
+        public string HasCorrectPageTitle()
+        {
+            return driver.Title;
+        }
 
         #endregion
     }

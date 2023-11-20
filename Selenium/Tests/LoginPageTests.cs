@@ -15,6 +15,15 @@ namespace PlaywrightDemo.Selenium.Tests
             loginPage = new LoginPage(driver);
         }
 
+        [TestCase("http://eaapp.somee.com/Account/Login", "Login - Execute Automation Employee App")]
+        public void HasCorrectUrlAndTitle(string url, string title)
+        {
+            var loginPage = NavigateToLoginPage();
+
+            Assert.AreEqual(url, loginPage.HasCorrectUrl(), "Page URL isn't correct.");
+            Assert.AreEqual(title, loginPage.HasCorrectPageTitle(), "Page title isn't correct.");
+        }
+
         [TestCase("admin", "password", "Hello admin!")]
         public void CanUserLogin(string userName, string password, string expectedLnkText)
         {
