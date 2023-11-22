@@ -1,5 +1,4 @@
-﻿using Microsoft.Playwright;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace DemoTestFramework.Selenium.Pages
 {

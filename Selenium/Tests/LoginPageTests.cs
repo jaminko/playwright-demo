@@ -1,5 +1,4 @@
 ﻿using DemoTestFramework.Selenium.Pages;
-using DemoTestFramework.Tests;
 using NUnit.Framework;
 namespace DemoTestFramework.Selenium.Tests
 {

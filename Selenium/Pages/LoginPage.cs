@@ -1,5 +1,4 @@
-﻿using DemoTestFramework.Selenium.Pages;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace DemoTestFramework.Selenium.Pages
 {
