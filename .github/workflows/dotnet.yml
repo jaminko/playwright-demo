@@ -1,28 +1,29 @@
-name: Playwright Tests
-
+name: create-playwright CI
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
-
+    branches: [ main ]
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    services:
-      - name: docker
-        image: docker:dind
-        options: --privileged
-
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Build Docker image
-      run: docker build -t my-playwright-tests .
-
-    - name: Run Docker container
-      run: docker run --rm my-playwright-tests
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm i -g npm@8
+    - run: npm i -g yarn@1
+    - run: npm i -g pnpm@7
+    - run: npm ci
+    - run: npx playwright install-deps
+    - run: npm run build
+    - run: npx tsc --noEmit
+    - run: npm run test
