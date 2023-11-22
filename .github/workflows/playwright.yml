@@ -1,38 +1,21 @@
 name: Playwright Tests
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
+  push:
+    branches: [ main, master ]
   pull_request:
-    branches: [master]
+    branches: [ main, master ]
 jobs:
   test:
-    timeout-minutes: 200
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4   
-      
-      - name: Setup .NET
+    - uses: actions/checkout@v3
+    - name: Setup dotnet
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.x
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release
-      - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
-      - name: Run Playwright tests
-        run: npm run ${{vars.RUNTEST}}
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+        dotnet-version: 6.0.x
+    - run: dotnet build
+    - name: Ensure browsers are installed
+      run: pwsh bin/Debug/net6.0/playwright.ps1 install --with-deps
+    - name: Run your tests
+      run: dotnet test
