@@ -10,25 +10,22 @@ on:
     branches: [master]
 jobs:
   test:
-    
-  build:
+    timeout-minutes: 200
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-
-    - name: Setup .NET
+          - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release
-    timeout-minutes: 200
-    
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
