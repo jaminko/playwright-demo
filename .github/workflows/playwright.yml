@@ -20,7 +20,7 @@ jobs:
     - name: Run your tests
       run: dotnet test
 
-    - uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3
     - name: playwright-report
       path: playwright-report/
       retention-days: 7
