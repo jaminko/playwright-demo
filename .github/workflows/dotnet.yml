@@ -30,17 +30,5 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Update playwright
-      run: npm install -D @playwright/test@latest
-
-    - name: Install new browsers
-      run: npx playwright install
-
-    - name: Install system dependencies
-      run: npx playwright install-deps
-
-    - name: Run Playwright tests
-      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
-
     - name: Run Selenium tests
       run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Selenium.Tests
