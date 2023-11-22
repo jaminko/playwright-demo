@@ -28,8 +28,6 @@ jobs:
     - name: Update playwright
       run: npm install -D @playwright/test@latest
 
-    - run: npm ci
-    - run: npx playwright install-deps
     - run: npm run build
     - run: npx tsc --noEmit
     - run: npm run test
