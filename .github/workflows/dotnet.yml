@@ -23,6 +23,20 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet build --configuration Release
+    - name: Run Playwright tests
+      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install dependencies for Playwright
+      run: npm install
+
+    - name: Run Playwright tests
+      run: npx playwright test
+
+    - name: Run Selenium tests
+      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Selenium.Tests
