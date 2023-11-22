@@ -1,3 +1,6 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
 name: .NET
 
 on:
@@ -16,11 +19,18 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release
+    - name: Run Playwright tests
+      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
 
     - name: Run Docker command
       run: docker pull mcr.microsoft.com/playwright:v1.40.0-jammy
