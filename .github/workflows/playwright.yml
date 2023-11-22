@@ -16,7 +16,7 @@ jobs:
         dotnet-version: 5.0.x
     - run: dotnet build
     - name: Ensure browsers are installed
-      run: pwsh bin/Debug/net5.0/playwright.ps1 install --with-deps
+      run: pwsh bin/Debug/net5.0/playwright.ps1 install --with-deps chromium
     - name: Run your tests
       run: dotnet test
     - name: playwright-report
