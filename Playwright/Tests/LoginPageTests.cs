@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using DemoTestFramework.Playwright.Pages;
+using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using System.Threading.Tasks;
