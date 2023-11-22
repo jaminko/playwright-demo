@@ -1,31 +1,21 @@
-name: .NET
-
+name: Playwright Tests
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ "main" ]
-
+    branches: [ main, master ]
 jobs:
-  build:
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
+    - name: Setup dotnet
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release
-
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
-
-    - name: Update playwright
-      run: npm install -D @playwright/test@latest
-
-    - run: npm run test
+        dotnet-version: 6.0.x
+    - run: dotnet build
+    - name: Ensure browsers are installed
+      run: pwsh bin/Debug/net6.0/playwright.ps1 install --with-deps
+    - name: Run your tests
+      run: dotnet test
