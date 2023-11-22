@@ -19,3 +19,6 @@ jobs:
       run: pwsh bin/Debug/net5.0/playwright.ps1 install --with-deps
     - name: Run your tests
       run: dotnet test
+    - name: playwright-report
+        path: playwright-report/
+        retention-days: 7
