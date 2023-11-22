@@ -19,24 +19,28 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 4.8.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release
-    - name: Run Playwright tests
-      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
 
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '14'
 
-    - name: Install dependencies for Playwright
-      run: npm install
+    - name: Update playwright
+      run: npm install -D @playwright/test@latest
+
+    - name: Install new browsers
+      run: npx playwright install
+
+    - name: Install system dependencies
+      run: npx playwright install-deps
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
 
     - name: Run Selenium tests
       run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Selenium.Tests
