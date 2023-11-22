@@ -1,95 +1,28 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
+name: Playwright Tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
+    services:
+      - name: docker
+        image: docker:dind
+        options: --privileged
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release
-    - name: Run Playwright tests
-      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
+    - name: Build Docker image
+      run: docker build -t my-playwright-tests .
 
-    - name: Run Docker command
-      run: docker pull mcr.microsoft.com/playwright:v1.40.0-jammy
-
-      services:
-    base:
-        build:
-            context: .
-            target: base
-        image: jacoblincool/playwright:base
-    pnpm:
-        build:
-            context: .
-            target: pnpm
-        image: jacoblincool/playwright:pnpm
-    chromium:
-        build:
-            context: .
-            target: chromium
-        image: jacoblincool/playwright:chromium
-    firefox:
-        build:
-            context: .
-            target: firefox
-        image: jacoblincool/playwright:firefox
-    webkit:
-        build:
-            context: .
-            target: webkit
-        image: jacoblincool/playwright:webkit
-    chrome:
-        build:
-            context: .
-            target: chrome
-        image: jacoblincool/playwright:chrome
-    msedge:
-        build:
-            context: .
-            target: msedge
-        image: jacoblincool/playwright:msedge
-    all:
-        build:
-            context: .
-            target: all
-        image: jacoblincool/playwright:all
-    base-light:
-        build:
-            context: .
-            target: base-light
-        image: jacoblincool/playwright:base-light
-    chromium-light:
-        build:
-            context: .
-            target: chromium-light
-        image: jacoblincool/playwright:chromium-light
-
-
-    - name: Run Playwright tests
-      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
-
-
-
+    - name: Run Docker container
+      run: docker run --rm my-playwright-tests
