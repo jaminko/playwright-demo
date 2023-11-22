@@ -1,27 +1,85 @@
-name: Playwright Tests
+name: .NET
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ "main" ]
+
 jobs:
-  test:
-    timeout-minutes: 60
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
       with:
-        node-version: 18
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Run Docker command
+      run: docker pull mcr.microsoft.com/playwright:v1.40.0-jammy
+
+      services:
+    base:
+        build:
+            context: .
+            target: base
+        image: jacoblincool/playwright:base
+    pnpm:
+        build:
+            context: .
+            target: pnpm
+        image: jacoblincool/playwright:pnpm
+    chromium:
+        build:
+            context: .
+            target: chromium
+        image: jacoblincool/playwright:chromium
+    firefox:
+        build:
+            context: .
+            target: firefox
+        image: jacoblincool/playwright:firefox
+    webkit:
+        build:
+            context: .
+            target: webkit
+        image: jacoblincool/playwright:webkit
+    chrome:
+        build:
+            context: .
+            target: chrome
+        image: jacoblincool/playwright:chrome
+    msedge:
+        build:
+            context: .
+            target: msedge
+        image: jacoblincool/playwright:msedge
+    all:
+        build:
+            context: .
+            target: all
+        image: jacoblincool/playwright:all
+    base-light:
+        build:
+            context: .
+            target: base-light
+        image: jacoblincool/playwright:base-light
+    chromium-light:
+        build:
+            context: .
+            target: chromium-light
+        image: jacoblincool/playwright:chromium-light
+
+
     - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      run: dotnet test --filter FullyQualifiedName~DemoTestFramework.Playwright.Tests
+
+
+
