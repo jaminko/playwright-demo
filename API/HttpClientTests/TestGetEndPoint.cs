@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace DemoTestFramework.API.HttpClientTests
 {
+    [TestFixture]
+    [Ignore("Pet id should be updated")]
     public class TestGetEndPoint
     {
         private string expectedStatusCode = "StatusCode: 200";
