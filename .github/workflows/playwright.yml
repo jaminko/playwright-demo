@@ -19,15 +19,3 @@ jobs:
       run: pwsh bin/Debug/net5.0/playwright.ps1 install --with-deps chromium
     - name: Run your tests
       run: dotnet test
-
-    - name: Delete file
-      run: |
-        rm playwright-demo/.github/workflows/dotnet.yml
-
-    - name: Commit and push changes
-     run: |
-     if [ -e "playwright-demo/.github/workflows/dotnet.yml" ]; then
-     rm playwright-demo/github/workflows/dotnet.yml
-     else
-     echo "File not found: playwright-demo/github/workflows/dotnet.yml"
-     fi
