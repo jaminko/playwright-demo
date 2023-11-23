@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using DemoTestFramework.Selenium.Utilities;
+using OpenQA.Selenium;
 
 namespace DemoTestFramework.Selenium.Pages
 {
@@ -10,16 +11,13 @@ namespace DemoTestFramework.Selenium.Pages
 
         #region Components
 
-        private IWebElement TxtUserName => driver.FindElement(By.CssSelector("#UserName"));
+        private IWebElement TxtUsername => driver.FindElement(By.Id("username"));
 
-        private IWebElement TxtPassword => driver.FindElement(By.CssSelector("#Password"));
+        private IWebElement TxtPassword => driver.FindElement(By.Id("password"));
 
-        private IWebElement BtnLogin => driver.FindElement(By.CssSelector(".btn-default"));
+        private IWebElement BtnSubmit => driver.FindElement(By.Id("submit"));
 
-        private IWebElement TxtUserNameErrorMsg => driver.FindElement(By.CssSelector("span[data-valmsg-for='UserName']"));
-
-        private IWebElement TxtPasswordErrorMsg => driver.FindElement(By.CssSelector("span[data-valmsg-for='Password']"));
-
+        private IWebElement ErrorMsg => driver.FindElement(By.CssSelector(".show"));
 
         #endregion
 
@@ -27,15 +25,21 @@ namespace DemoTestFramework.Selenium.Pages
 
         public LoggedInPage PerformLogin(string userName, string password)
         {
-            TxtUserName.SendKeys(userName);
+            TxtUsername.SendKeys(userName);
             TxtPassword.SendKeys(password);
-            BtnLogin.Click();
+            BtnSubmit.Click();
             return new LoggedInPage(driver);
         }
 
-        public string TxtUserNameErrorMsgText => TxtUserNameErrorMsg.Text;
-
-        public string TxtPasswordErrorMsgText => TxtPasswordErrorMsg.Text;
+        public string ErrorMsgText()
+        {
+            if (WaitHelper.WaitElementIsPresent(driver, ErrorMsg, 2))
+            {
+                return ErrorMsg.Text;
+            }
+            else
+                return string.Empty;             
+        }
 
         #endregion
 

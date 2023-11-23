@@ -8,7 +8,7 @@ namespace DemoTestFramework.API.HttpClientTests
     public class TestGetEndPoint
     {
         private string expectedStatusCode = "StatusCode: 200";
-        private string getUrl = "https://petstore.swagger.io/v2/pet/9223372036854745978";
+        private string getUrl = "https://petstore.swagger.io/v2/pet/9223372036854774215";
         protected HttpClient client;
 
         [SetUp]

@@ -4,17 +4,17 @@ namespace DemoTestFramework.Selenium.Tests
 {
     public class LoginPageTests : BaseTest
     {
-        private readonly string homePageUrl = "http://eaapp.somee.com/";
+        private readonly string practicePageUrl = "https://practicetestautomation.com/practice/";
         private LoginPage loginPage;
 
         [SetUp]
         public void Setup()
         {
-            InitDriver(homePageUrl);
+            InitDriver(practicePageUrl);
             loginPage = new LoginPage(driver);
         }
 
-        [TestCase("http://eaapp.somee.com/Account/Login", "Login - Execute Automation Employee App")]
+        [TestCase("https://practicetestautomation.com/practice-test-login/", "Test Login | Practice Test Automation")]
         public void HasCorrectUrlAndTitle(string url, string title)
         {
             var loginPage = NavigateToLoginPage();
@@ -23,42 +23,42 @@ namespace DemoTestFramework.Selenium.Tests
             Assert.AreEqual(title, loginPage.HasCorrectPageTitle(), "Page title isn't correct.");
         }
 
-        [TestCase("admin", "password", "Hello admin!")]
+        [TestCase("student", "Password123", "Log out")]
         public void CanUserLogin(string userName, string password, string expectedLnkText)
         {
             var loginPage = NavigateToLoginPage();
             var loggedInPage = loginPage.PerformLogin(userName, password);
 
             Assert.IsNotNull(loggedInPage, "Logged-in page could not be found.");
-            Assert.IsTrue(loggedInPage.HasLnkHelloAdmin, "Logged-in page 'Hello Admin' link could not be found.");
-            Assert.AreEqual(expectedLnkText, loggedInPage.LnkHelloAdminText, "'Hello Admin' signatuse isn't correct.");
+            Assert.IsTrue(loggedInPage.HasBtnLogOut, "Log out CTA button could not be found.");
+            Assert.AreEqual(expectedLnkText, loggedInPage.BtnLogOutText, "Log out CTA button signature isn't correct.");
         }
 
-        [TestCase("", "password", "The UserName field is required.")]
+        [TestCase("", "Password123", "Your username is invalid!")]
         public void IsUserNameFldErrorMsgDisplayed(string userName, string password, string expectedErrMsg)
         {
             var loginPage = NavigateToLoginPage();
             loginPage.PerformLogin(userName, password);
 
-            Assert.AreEqual(expectedErrMsg, loginPage.TxtUserNameErrorMsgText, "User name text field error message text signatuse isn't correct.");
+            Assert.AreEqual(expectedErrMsg, loginPage.ErrorMsgText(), "User name text field error message text signatuse isn't correct.");
         }
 
-        [TestCase("admin", "", "The Password field is required.")]
+        [TestCase("student", "", "Your password is invalid!")]
 
         public void IsPasswordFldErrorMsgDisplayed(string userName, string password, string expectedErrMsg)
         {
             var loginPage = NavigateToLoginPage();
             loginPage.PerformLogin(userName, password);
 
-            Assert.AreEqual(expectedErrMsg, loginPage.TxtPasswordErrorMsgText, "User name text field error message text signatuse isn't correct.");
+            Assert.AreEqual(expectedErrMsg, loginPage.ErrorMsgText(), "User name text field error message text signatuse isn't correct.");
         }
 
         #region Helper methods
 
         private LoginPage NavigateToLoginPage()
         {
-            HomePage homePage = new HomePage(driver);
-            var loginPage = homePage.LnkLoginClick();
+            PracticePage homePage = new PracticePage(driver);
+            var loginPage = homePage.LnkTestLoginPageClick();
             return loginPage;
         }
 

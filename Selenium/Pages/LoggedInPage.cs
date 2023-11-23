@@ -12,19 +12,19 @@ namespace DemoTestFramework.Selenium.Pages
 
         #region Components
 
-        private IWebElement LnkHelloAdmin => driver.FindElement(By.CssSelector("a[title='Manage']"));
+        private IWebElement BtnLogOut => driver.FindElement(By.CssSelector(".wp-block-button"));
 
         #endregion
 
         #region Asserts
 
-        public bool HasLnkHelloAdmin => LnkHelloAdmin.Displayed;
+        public bool HasBtnLogOut => BtnLogOut.Displayed;
 
         #endregion
 
         #region Helper methods
 
-        public string LnkHelloAdminText => LnkHelloAdmin.Text;
+        public string BtnLogOutText => BtnLogOut.Text;
 
         #endregion
     }

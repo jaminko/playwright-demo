@@ -22,6 +22,7 @@ namespace DemoTestFramework.Selenium.Tests
             };
             options.AddArgument("--silent");
             options.AddArgument("log-level=3");
+            options.AddArgument("--headless");
 
             driver = new ChromeDriver(chromeDriverService, options);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);

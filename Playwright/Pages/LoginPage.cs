@@ -14,9 +14,9 @@ namespace DemoTestFramework.Playwright.Pages
 
         #region Components
 
-        private ILocator TxtUserName => _page.Locator("#UserName");
-        private ILocator TxtPassword => _page.Locator("#Password");
-        private ILocator BtnLogin => _page.Locator(".btn-default", new PageLocatorOptions { HasTextString = "Log in" });
+        private ILocator TxtUserName => _page.Locator("input[name='username']");
+        private ILocator TxtPassword => _page.Locator("input[name='password']");
+        private ILocator BtnSubmit => _page.Locator(".btn", new PageLocatorOptions { HasTextString = "Submit" });
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace DemoTestFramework.Playwright.Pages
         {
             await TxtUserName.FillAsync(userName);
             await TxtPassword.FillAsync(password);
-            await BtnLogin.ClickAsync();
+            await BtnSubmit.ClickAsync();
             return new LoggedInPage(_page);
         }
 
