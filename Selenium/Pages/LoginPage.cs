@@ -33,7 +33,7 @@ namespace DemoTestFramework.Selenium.Pages
 
         public string ErrorMsgText()
         {
-            if (WaitHelper.WaitElementIsPresent(driver, ErrorMsg, 2))
+            if (WaitHelpers.WaitElementIsPresent(driver, ErrorMsg, 2))
             {
                 return ErrorMsg.Text;
             }

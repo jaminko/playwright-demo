@@ -1,5 +1,6 @@
 ﻿using DemoTestFramework.Selenium.Pages;
 using NUnit.Framework;
+
 namespace DemoTestFramework.Selenium.Tests
 {
     public class LoginPageTests : BaseTest

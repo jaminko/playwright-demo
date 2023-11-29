@@ -22,12 +22,12 @@ namespace DemoTestFramework.Selenium.Tests
             };
             options.AddArgument("--silent");
             options.AddArgument("log-level=3");
-            options.AddArgument("--headless");
+            //options.AddArgument("--headless");
 
             driver = new ChromeDriver(chromeDriverService, options);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.Manage().Window.Minimize();
+            driver.Manage().Window.Maximize();
             driver.Url = url;
         }
 
