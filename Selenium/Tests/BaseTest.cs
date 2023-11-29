@@ -25,8 +25,8 @@ namespace DemoTestFramework.Selenium.Tests
             options.AddArgument("--headless");
 
             driver = new ChromeDriver(chromeDriverService, options);
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
             driver.Url = url;
         }

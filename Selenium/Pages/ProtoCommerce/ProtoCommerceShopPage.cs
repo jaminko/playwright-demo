@@ -1,5 +1,4 @@
-﻿using DemoTestFramework.Selenium.Utilities;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,9 +39,8 @@ namespace DemoTestFramework.Selenium.Pages.ProtoCommerce
                     var targetCard = GetRootElement(GetProductBySignature(productSignature));
                     targetCard.FindElement(By.CssSelector(".card-footer button")).Click();
 
-                    Assert.IsTrue(WaitHelpers.WaitUntilCondition(driver, _ => btnCheckoutText != BtnCheckoutText),
+                    Assert.IsTrue(Utilities.WaitHelpers.WaitUntilCondition(driver, _ => btnCheckoutText != BtnCheckoutText),
                         "Checkout button signature was not changed.");
-
                     btnCheckoutText = BtnCheckoutText;
                 }
             }
